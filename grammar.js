@@ -41,7 +41,7 @@ module.exports = grammar({
 
     argument: ($) => choice($.bracket_argument, $.quoted_argument, $.unquoted_argument),
     _opt_argument: ($) => seq("(", optional(seq(/\s*/, $.argument, /\s*/)), ")"),
-    _untrimmed_argument: ($) => choice(/\s/, $.bracket_comment, $.line_comment, $.argument, $.paren_argument),
+    _untrimmed_argument: ($) => choice(/\s/, $.bracket_comment, $.line_comment, $.argument, $._paren_argument),
     _paren_argument: ($) => seq("(", repeat($._untrimmed_argument), ")"),
 
     quoted_argument: ($) => seq('"', optional($.quoted_element), '"'),
